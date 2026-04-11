@@ -9,5 +9,5 @@
 const std = @import("std");
 const Io = std.Io;
 
-pub const Machine = @import("machine.zig");
-pub const Draw = @import("draw.zig");
+pub const machine = @import("machine.zig");
+pub const draw = @import("draw.zig");
