@@ -7,6 +7,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 const MOKA_128 = @import("MOKA_128");
+const video = @import("video.zig");
 
 pub fn main() !void {
 }
