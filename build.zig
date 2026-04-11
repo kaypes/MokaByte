@@ -41,7 +41,7 @@ pub fn build(b: *std.Build) void {
     );
 
     const mod = b.addModule("MOKA_128", .{
-        .root_source_file = b.path("src/root.zig"),
+        .root_source_file = b.path("src/core/root.zig"),
         .target = target,
         .imports = &.{.{
             .name = "raylib",
@@ -52,7 +52,7 @@ pub fn build(b: *std.Build) void {
     const exe = b.addExecutable(.{
         .name = "MOKA_128",
         .root_module = b.createModule(.{
-            .root_source_file = b.path("src/main.zig"),
+            .root_source_file = b.path("src/system/main.zig"),
             .target = target,
             .optimize = optimize,
             .imports = &.{
