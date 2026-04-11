@@ -1,0 +1,22 @@
+.{
+    .name = .MOKA_128,
+    .version = "0.0.0",
+    .fingerprint = 0x1640fa2f2e0e2cc9,
+    .minimum_zig_version = "0.16.0-dev.3133+5ec8e45f3",
+    .dependencies = .{
+        .raylib_zig = .{
+            .url = "git+https://github.com/raylib-zig/raylib-zig?ref=devel#a93d7f04aeeb138efc0a08b406aad74cdea17c1c",
+            .hash = "raylib_zig-5.6.0-dev-KE8REJ9mBQC9yBwvG5aBLUgMaGVGyzbrpyGZNUyzwvUI",
+        },
+        .zlua = .{
+            .url = "git+https://github.com/natecraddock/ziglua#9f5f3db7ed893000e44badc073e0f3632b731021",
+            .hash = "zlua-0.1.0-hGRpC-xTBQDwe5Mu1zKV5SB2VOY9AmSco05_vurY5jGh",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "LICENSE",
+    },
+}
