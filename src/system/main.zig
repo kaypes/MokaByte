@@ -15,24 +15,16 @@ const core = @import("MOKA_128");
 pub fn main() !void {
     var machine: core.machine.Memory = undefined;
     @memset(machine.raw[0..], 0);
-   
     machine.map.palette = core.machine.palette;
 
-    core.draw.cls(&machine, 0);
+    var vm = try core.vm.VM.init(&machine);
+    defer vm.deinit();
 
-    var x: i32 = 0;
-    while (x < 256) : (x += 1) {
-        core.draw.pix(&machine, x, 96, 1);
-    }
-
-    core.draw.pix(&machine, 127, 90, 2);
-    core.draw.pix(&machine, 128, 91, 3);
-    core.draw.pix(&machine, 129, 92, 4);
-
-    var display = try video.Renderer.init("Moka Fantasy Console");
+    var display = try video.Renderer.init("MOKA-128");
     defer display.deinit();
 
     while (!rl.windowShouldClose()) {
+        vm.tick();
         display.drawFrame(&machine);
     }
 }

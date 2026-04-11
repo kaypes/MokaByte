@@ -12,3 +12,4 @@ const Io = std.Io;
 pub const machine = @import("machine.zig");
 pub const draw = @import("draw.zig");
 pub const api = @import("api.zig");
+pub const vm = @import("vm.zig");
