@@ -6,6 +6,8 @@
 //
 // SPDX-License-Identifier: MPL-2.0
 
+pub const width = 256;
+pub const height = 192;
 pub const vram_size = 24 * 1024;
 pub const ram_size = vram_size + 104 * 1024;
 
