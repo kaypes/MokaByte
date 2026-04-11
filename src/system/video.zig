@@ -51,4 +51,10 @@ pub const Renderer = struct {
             .texture = tex,
         };
     }
+
+    pub fn deinit(self: *Self) void {
+        rl.unloadImage(self.image);
+        rl.unloadTexture(self.texture);
+        rl.closeWindow();
+    }
 };
