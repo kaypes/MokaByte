@@ -30,30 +30,30 @@ pub fn update(machine: *core.machine.Memory) void {
     const btn = core.machine.Button;
 
     if (isPressed(&.{ .up, .w }, .left_face_up)) {
-        state |= (1 << btn.up);
+        state |= (1 << @intFromEnum(btn.up));
     }
     if (isPressed(&.{ .down, .s }, .left_face_down)) {
-        state |= (1 << btn.down);
+        state |= (1 << @intFromEnum(btn.down));
     }
     if (isPressed(&.{ .left, .a }, .left_face_left)) {
-        state |= (1 << btn.left);
+        state |= (1 << @intFromEnum(btn.left));
     }
     if (isPressed(&.{ .right, .d }, .left_face_right)) {
-        state |= (1 << btn.right);
+        state |= (1 << @intFromEnum(btn.right));
     }
 
     if (isPressed(&.{ .z, .k }, .right_face_down)) {
-        state |= (1 << btn.a);
+        state |= (1 << @intFromEnum(btn.a));
     }
     if (isPressed(&.{ .x, .l }, .right_face_right)) {
-        state |= (1 << btn.b);
+        state |= (1 << @intFromEnum(btn.b));
     }
 
     if (isPressed(&.{ .right_shift, .v }, .middle_left)) {
-        state |= (1 << btn.select);
+        state |= (1 << @intFromEnum(btn.select));
     }
     if (isPressed(&.{ .enter, .b }, .middle_right)) {
-        state |= (1 << btn.start);
+        state |= (1 << @intFromEnum(btn.start));
     }
 
     machine.map.gamepad = state;

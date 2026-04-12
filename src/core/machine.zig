@@ -36,15 +36,15 @@ pub const palette = [_]Rgb{
     .{ .r = 185, .g = 124, .b = 255 },
 };
 
-pub const Button = struct {
-    pub const up = 0;
-    pub const down = 1;
-    pub const left = 2;
-    pub const right = 3;
-    pub const a = 4;
-    pub const b = 5;
-    pub const select = 6;
-    pub const start = 7;
+pub const Button = enum(u3) {
+    up = 0,
+    down = 1,
+    left = 2,
+    right = 3,
+    a = 4,
+    b = 5,
+    select = 6,
+    start = 7,
 };
 
 pub const Memory = extern union {
@@ -57,11 +57,12 @@ pub const Memory = extern union {
         gamepad: u8,
         previous_gamepad: u8,
 
-        sound_freq: u16,
-        sound_vol: u8,
-        sound_wave: u8,
-        sound_duration: u16,
-
-        padding: [ram_size - vram_size - 48 - 8]u8,
+        padding: [
+            ram_size
+            - vram_size
+            - @sizeOf([16]Rgb)
+            - @sizeOf(u8)
+            - @sizeOf(u8)
+        ]u8,
     },
 };
