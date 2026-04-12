@@ -13,6 +13,10 @@ const input = @import("input.zig");
 
 const core = @import("MokaByte");
 
+const demos = [_][:0]const u8{
+    "demos/hello.lua",
+};
+
 pub fn main() !void {
     var machine: core.machine.Memory = undefined;
     @memset(machine.raw[0..], 0);
@@ -21,7 +25,9 @@ pub fn main() !void {
     var vm = try core.vm.VM.init(&machine);
     defer vm.deinit();
 
-    var display = try video.Renderer.init("MOKA-128");
+    try vm.loadCartridge("demos/pixel_move.lua");
+
+    var display = try video.Renderer.init("MokaByte");
     defer display.deinit();
 
     while (!rl.windowShouldClose()) {
