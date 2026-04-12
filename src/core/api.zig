@@ -51,3 +51,21 @@ pub fn btn(lua: *ziglua.Lua) i32 {
 
     return 1;
 }
+
+pub fn btnp(lua: *ziglua.Lua) i32 {
+    const mem_ptr = lua.toUserdata(machine.Memory, mem_index) catch return 0;
+    const button_id = lua.toInteger(1) catch 0;
+
+    if (button_id < 0 or button_id > 7) {
+        lua.pushBoolean(false);
+        return 1;
+    }
+
+    const mask = @as(u8, 1) << @intCast(button_id);
+    const is_pressed_now = (mem_ptr.map.gamepad & mask) != 0;
+    const was_pressed_before = (mem_ptr.map.previous_gamepad & mask) != 0;
+
+    lua.pushBoolean(is_pressed_now and !was_pressed_before);
+
+    return 1;
+}

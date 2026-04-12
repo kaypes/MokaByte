@@ -24,8 +24,9 @@ fn isPressed(keys: []const rl.KeyboardKey, btn: rl.GamepadButton) bool {
 }
 
 pub fn update(machine: *core.machine.Memory) void {
-    var state: u8 = 0;
+    machine.map.previous_gamepad = machine.map.gamepad;
 
+    var state: u8 = 0;
     const btn = core.machine.Button;
 
     if (isPressed(&.{ .up, .w }, .left_face_up)) {
