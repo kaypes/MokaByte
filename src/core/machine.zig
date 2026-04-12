@@ -55,7 +55,8 @@ pub const Memory = extern union {
         palette: [16]Rgb,
 
         gamepad: u8,
+        previous_gamepad: u8,
 
-        padding: [ram_size - vram_size - 48 - 1]u8,
+        padding: [ram_size - vram_size - 48 - 2]u8,
     },
 };
