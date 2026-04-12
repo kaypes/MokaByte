@@ -9,6 +9,7 @@
 const std = @import("std");
 const rl = @import("raylib");
 const video = @import("video.zig");
+const input = @import("input.zig");
 
 const core = @import("MokaByte");
 

@@ -36,13 +36,26 @@ pub const palette = [_]Rgb{
     .{ .r = 185, .g = 124, .b = 255 },
 };
 
+pub const Button = struct {
+    pub const up = 0;
+    pub const down = 1;
+    pub const left = 2;
+    pub const right = 3;
+    pub const a = 4;
+    pub const b = 5;
+    pub const select = 6;
+    pub const start = 7;
+};
+
 pub const Memory = extern union {
     raw: [ram_size]u8,
 
     map: extern struct {
         vram: [vram_size]u8,
         palette: [16]Rgb,
-        input: u64,
-        padding: [ram_size - vram_size - (16 * 3)]u8,
+
+        gamepad: u8,
+
+        padding: [ram_size - vram_size - 48 - 1]u8,
     },
 };
