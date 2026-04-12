@@ -57,6 +57,10 @@ pub const Memory = extern union {
         gamepad: u8,
         previous_gamepad: u8,
 
-        padding: [ram_size - vram_size - 48 - 2]u8,
+        sound_freq: u16,
+        sound_vol: u8,
+        sound_wave: u8,
+
+        padding: [ram_size - vram_size - 48 - 6]u8,
     },
 };
