@@ -35,16 +35,24 @@ pub const VM = struct {
         lua.setGlobal("btn");
 
         const script_cartucho =
-            \\ x = 0
+            \\ x = 128
+            \\ y = 96
+            \\
             \\ function TIC()
-            \\    cls(0) -- Limpa a tela com preto
+            \\    cls(0)
             \\    
-            \\    -- Desenha uma linha diagonal
-            \\    pix(x, x, 1) 
-            \\    pix(x+1, x, 2)
-            \\    
-            \\    x = x + 1
-            \\    if x > 192 then x = 0 end
+            \\    if btn(0) then y = y - 1 end
+            \\    if btn(1) then y = y + 1 end
+            \\    if btn(2) then x = x - 1 end
+            \\    if btn(3) then x = x + 1 end
+            \\
+            \\    if x > 256 then x = 0 end
+            \\    if x < 0 then x = 256 end
+            \\
+            \\    if y > 192 then y = 0 end
+            \\    if y < 0 then y = 192 end
+            \\
+            \\    pix(x, y, 4) 
             \\ end
         ;
 

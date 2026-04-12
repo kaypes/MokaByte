@@ -25,6 +25,7 @@ pub fn main() !void {
     defer display.deinit();
 
     while (!rl.windowShouldClose()) {
+        input.update(&machine);
         vm.tick();
         display.drawFrame(&machine);
     }
