@@ -30,6 +30,10 @@ pub const VM = struct {
         lua.pushClosure(ziglua.wrap(api.pix), 1);
         lua.setGlobal("pix");
 
+        lua.pushLightUserdata(mem);
+        lua.pushClosure(ziglua.wrap(api.btn), 1);
+        lua.setGlobal("btn");
+
         const script_cartucho =
             \\ x = 0
             \\ function TIC()
