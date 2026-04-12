@@ -47,6 +47,13 @@ pub const Button = enum(u3) {
     start = 7,
 };
 
+pub const SoundChannel = extern struct {
+    freq: u16,
+    vol: u8,
+    wave: u8,
+    duration: u16,
+};
+
 pub const Memory = extern union {
     raw: [ram_size]u8,
 
@@ -57,12 +64,15 @@ pub const Memory = extern union {
         gamepad: u8,
         previous_gamepad: u8,
 
+        sound_channels: [6]SoundChannel,
+
         padding: [
             ram_size
             - vram_size
             - @sizeOf([16]Rgb)
             - @sizeOf(u8)
             - @sizeOf(u8)
+            - @sizeOf([6]SoundChannel)
         ]u8,
     },
 };
