@@ -7,7 +7,7 @@
 // SPDX-License-Identifier: MPL-2.0
 
 const rl = @import("raylib");
-const core = @import("MOKA_128");
+const core = @import("MokaByte");
 
 pub const Renderer = struct {
     const width = 256;

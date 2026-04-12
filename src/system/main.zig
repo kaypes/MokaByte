@@ -10,7 +10,7 @@ const std = @import("std");
 const rl = @import("raylib");
 const video = @import("video.zig");
 
-const core = @import("MOKA_128");
+const core = @import("MokaByte");
 
 pub fn main() !void {
     var machine: core.machine.Memory = undefined;

@@ -40,7 +40,7 @@ pub fn build(b: *std.Build) void {
         "0",
     );
 
-    const mod = b.addModule("MOKA_128", .{
+    const mod = b.addModule("MokaByte", .{
         .root_source_file = b.path("src/core/root.zig"),
         .target = target,
         .optimize = optimize,
@@ -51,14 +51,14 @@ pub fn build(b: *std.Build) void {
     });
 
     const exe = b.addExecutable(.{
-        .name = "MOKA_128",
+        .name = "MokaByte",
         .root_module = b.createModule(.{
             .root_source_file = b.path("src/system/main.zig"),
             .target = target,
             .optimize = optimize,
             .imports = &.{
                 .{
-                    .name = "MOKA_128",
+                    .name = "MokaByte",
                     .module = mod,
                 },
                 .{

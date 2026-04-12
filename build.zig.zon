@@ -1,7 +1,7 @@
 .{
-    .name = .MOKA_128,
+    .name = .MokaByte,
     .version = "0.0.0",
-    .fingerprint = 0x1640fa2f2e0e2cc9,
+    .fingerprint = 0x70937f71190690e5,
     .minimum_zig_version = "0.16.0-dev.3133+5ec8e45f3",
     .dependencies = .{
         .raylib_zig = .{
