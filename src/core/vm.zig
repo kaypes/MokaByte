@@ -34,33 +34,17 @@ pub const VM = struct {
         lua.pushClosure(ziglua.wrap(api.btn), 1);
         lua.setGlobal("btn");
 
-        const script_cartucho =
-            \\ x = 128
-            \\ y = 96
-            \\
-            \\ function TIC()
-            \\    cls(0)
-            \\    
-            \\    if btn(0) then y = y - 1 end
-            \\    if btn(1) then y = y + 1 end
-            \\    if btn(2) then x = x - 1 end
-            \\    if btn(3) then x = x + 1 end
-            \\
-            \\    if x > 256 then x = 0 end
-            \\    if x < 0 then x = 256 end
-            \\
-            \\    if y > 192 then y = 0 end
-            \\    if y < 0 then y = 192 end
-            \\
-            \\    pix(x, y, 4) 
-            \\ end
-        ;
-
-        try lua.doString(script_cartucho);
-
         return Self{
             .lua = lua,
             .machine_ptr = mem,
+        };
+    }
+
+    pub fn loadCartridge(self: *Self, filepath: [:0]const u8) !void {
+        self.lua.doFile(filepath) catch |err| {
+            std.debug.print("\nCould not load cartridge: {s}\n", .{filepath});
+            std.debug.print("Error: {}\n\n", .{err});
+            return err;
         };
     }
 
