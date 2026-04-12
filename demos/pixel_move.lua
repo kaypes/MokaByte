@@ -6,7 +6,6 @@
 x = 128
 y = 96
 color = 4
-timer = 0
 
 function TIC()
     cls(0)
@@ -34,21 +33,14 @@ function TIC()
     end
 
     if moved then
-        sfx(220, 50, 1)
+        sfx(220, 50, 1, 1)
     end
     
     if btnp(4) then
         color = color + 1
         if color > 15 then color = 1 end
         
-        timer = 10
-    end
-    
-    if timer > 0 then
-        sfx(500, 50, 3)
-        timer = timer - 1
-    elseif not moved and not btnp(4) then
-        sfx(0, 0, 0)
+        sfx(500, 50, 3, 10)
     end
 
     if x > 256 then x = 0 end

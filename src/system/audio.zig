@@ -57,6 +57,14 @@ pub const Driver = struct {
             return;
         }
 
+        if (machine.map.sound_duration > 0) {
+            machine.map.sound_duration -= 1;
+
+            if (machine.map.sound_duration == 0) {
+                machine.map.sound_vol = 0;
+            }
+        }
+
         var buffer: [samples_per_frame]i16 = undefined;
 
         const freq: u16 = machine.map.sound_freq;

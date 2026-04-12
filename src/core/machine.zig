@@ -60,7 +60,8 @@ pub const Memory = extern union {
         sound_freq: u16,
         sound_vol: u8,
         sound_wave: u8,
+        sound_duration: u16,
 
-        padding: [ram_size - vram_size - 48 - 6]u8,
+        padding: [ram_size - vram_size - 48 - 8]u8,
     },
 };
