@@ -78,17 +78,20 @@ pub fn sfx(lua: *ziglua.Lua) i32 {
     const wave = lua.toInteger(3) catch 1;
     const duration = lua.toInteger(4) catch 0;
 
-    var channel = lua.toInteger(5) catch 0;
+    const channel = lua.toInteger(5) catch -1;
+    var ch_idx: usize = 0;
 
-    if (channel < 0) {
-        channel = 0;
+    if (channel == -1) {
+        for (&mem_ptr.map.sound_channels, 0..) |ch, i| {
+            if (ch.duration == 0) {
+                ch_idx = i;
+                break;
+            }
+        }
+    } else {
+        ch_idx = @as(usize, @intCast(@max(0, @min(channel, 5))));
     }
 
-    if (channel > 5) {
-        channel = 5;
-    }
-
-    const ch_idx = @as(usize, @intCast(channel));
     mem_ptr.map.sound_channels[ch_idx].freq = @intCast(freq);
     mem_ptr.map.sound_channels[ch_idx].vol = @intCast(vol);
     mem_ptr.map.sound_channels[ch_idx].wave = @intCast(wave);

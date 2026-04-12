@@ -54,17 +54,8 @@ pub const Driver = struct {
             return;
         }
 
-        for (&machine.map.sound_channels) |*ch| {
-            if (ch.duration > 0) {
-                ch.duration -= 1;
-
-                if (ch.duration == 0) {
-                    ch.vol = 0;
-                }
-            }
-        }
-
         var buffer: [samples_per_frame]i16 = undefined;
+        
         for (&buffer) |*sample| {
             var mix_val: f32 = 0.0;
 
@@ -102,6 +93,16 @@ pub const Driver = struct {
         }
 
         rl.updateAudioStream(self.stream, &buffer, samples_per_frame);
+
+        for (&machine.map.sound_channels) |*ch| {
+            if (ch.duration > 0) {
+                ch.duration -= 1;
+
+                if (ch.duration == 0) {
+                    ch.vol = 0;
+                }
+            }
+        }
     }
 
     pub fn deinit(self: *Self) void {
