@@ -38,6 +38,10 @@ pub const VM = struct {
         lua.pushClosure(ziglua.wrap(api.btnp), 1);
         lua.setGlobal("btnp");
 
+        lua.pushLightUserdata(mem);
+        lua.pushClosure(ziglua.wrap(api.sfx), 1);
+        lua.setGlobal("sfx");
+
         return Self{
             .lua = lua,
             .machine_ptr = mem,

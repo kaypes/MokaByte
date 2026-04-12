@@ -69,3 +69,17 @@ pub fn btnp(lua: *ziglua.Lua) i32 {
 
     return 1;
 }
+
+pub fn sfx(lua: *ziglua.Lua) i32 {
+    const mem_ptr = lua.toUserdata(machine.Memory, mem_index) catch return 0;
+
+    const freq = lua.toInteger(1) catch 0;
+    const vol = lua.toInteger(2) catch 255;
+    const wave = lua.toInteger(3) catch 1;
+
+    mem_ptr.map.sound_freq = @intCast(freq);
+    mem_ptr.map.sound_vol = @intCast(vol);
+    mem_ptr.map.sound_wave = @intCast(wave);
+
+    return 0;
+}

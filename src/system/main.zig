@@ -10,6 +10,7 @@ const std = @import("std");
 const rl = @import("raylib");
 const video = @import("video.zig");
 const input = @import("input.zig");
+const audio = @import("audio.zig");
 
 const core = @import("MokaByte");
 
@@ -30,9 +31,13 @@ pub fn main() !void {
     var display = try video.Renderer.init("MokaByte");
     defer display.deinit();
 
+    var speaker = try audio.Driver.init();
+    defer speaker.deinit();
+
     while (!rl.windowShouldClose()) {
         input.update(&machine);
         vm.tick();
+        speaker.update(&machine);
         display.drawFrame(&machine);
     }
 }
