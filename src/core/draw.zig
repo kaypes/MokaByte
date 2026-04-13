@@ -29,3 +29,19 @@ pub fn pix(mem: *machine.Memory, x: i32, y: i32, color_index: u4) void {
         mem.map.vram[byte_index] = (mem.map.vram[byte_index] & 0xF0) | @as(u8, color_index);
     }
 }
+
+fn hline(mem: *machine.Memory, x1: i32, x2: i32, y: i32, color: u8) void {
+    if (y < 0 or y >= machine.height) {
+        return;
+    }
+
+    const start_x = @max(0, @min(x1, x2));
+    const end_x = @min(@as(i32, machine.width - 1), @max(x1, x2));
+
+    var cx = start_x;
+    while (cx <= end_x) : (cx += 1) {
+        pix(mem, cx, y, color);
+    }
+}
+
+// pub fn circ(mem: *machine.Memory, x: i32, y: i32, color_index: u4) void {}
