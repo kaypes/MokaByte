@@ -20,7 +20,10 @@ pub const VM = struct {
     pub fn init(mem: *machine.Memory) !Self {
         const lua = try ziglua.Lua.init(std.heap.page_allocator);
 
-        lua.openLibs();
+        lua.openBase();
+        lua.openMath();
+        lua.openString();
+        lua.openTable();
 
         lua.pushLightUserdata(mem);
         lua.pushClosure(ziglua.wrap(api.cls), 1);
