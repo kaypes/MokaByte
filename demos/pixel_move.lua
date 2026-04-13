@@ -7,7 +7,7 @@ x = 128
 y = 96
 color = 4
 
-function TIC()
+function GO()
     cls(0)
 
     local moved = false
@@ -33,14 +33,14 @@ function TIC()
     end
 
     if moved then
-        sfx(220, 50, 1, 1)
+        sfx(220, 100, 1, 1)
     end
     
     if btnp(4) then
         color = color + 1
         if color > 15 then color = 1 end
         
-        sfx(500, 50, 3, 10)
+        sfx(500, 100, 3, 10)
     end
 
     if x > 256 then x = 0 end

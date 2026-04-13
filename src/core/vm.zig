@@ -57,7 +57,7 @@ pub const VM = struct {
     }
 
     pub fn tick(self: *Self) void {
-        _ = self.lua.getGlobal("TIC") catch return;
+        _ = self.lua.getGlobal("GO") catch return;
 
         self.lua.protectedCall(.{ .args = 0, .results = 0 }) catch |err| {
             std.debug.print("Lua error: {}\n", .{err});
