@@ -44,4 +44,28 @@ fn hline(mem: *machine.Memory, x1: i32, x2: i32, y: i32, color: u8) void {
     }
 }
 
-// pub fn circ(mem: *machine.Memory, x: i32, y: i32, color_index: u4) void {}
+pub fn circ(mem: *machine.Memory, xc: i32, yc: i32, r: i32, color: u4) void {
+    var x: i32 = 0;
+    var y: i32 = 0;
+    var d: i32 = 1 - r;
+
+    while (y >= x) {
+        pix(mem, xc + x, yc + y, color);
+        pix(mem, xc - x, yc - y, color);
+        pix(mem, xc + x, yc - y, color);
+        pix(mem, xc - x, yc + y, color);
+        pix(mem, xc + x, yc + y, color);
+        pix(mem, xc + y, yc + x, color);
+        pix(mem, xc - y, yc - x, color);
+        pix(mem, xc + y, yc - x, color);
+        pix(mem, xc - y, yc + x, color);
+
+        x += 1;
+        if (d > 0) {
+            y -= 1;
+            d += 2 * x + 1;
+        } else {
+            d += 2 * (x - y) + 1;
+        }
+    }
+}

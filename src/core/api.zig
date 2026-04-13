@@ -103,3 +103,15 @@ pub fn sfx(lua: *ziglua.Lua) i32 {
 
     return 0;
 }
+
+pub fn circ(lua: *ziglua.Lua) i32 {
+    const mem_ptr = lua.toUserdata(machine.Memory, mem_index) catch return 0;
+
+    const x = lua.toInteger(1) catch 0;
+    const y = lua.toInteger(2) catch 0;
+    const r = lua.toInteger(3) catch 0;
+    const color = lua.toInteger(4) catch 0;
+
+    draw.circ(mem_ptr, @intCast(x), @intCast(y), @intCast(r), safeColor(color));
+    return 0;
+}

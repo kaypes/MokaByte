@@ -45,6 +45,10 @@ pub const VM = struct {
         lua.pushClosure(ziglua.wrap(api.sfx), 1);
         lua.setGlobal("sfx");
 
+        lua.pushLightUserdata(mem);
+        lua.pushClosure(ziglua.wrap(api.circ), 1);
+        lua.setGlobal("circ");
+
         return Self{
             .lua = lua,
             .machine_ptr = mem,
