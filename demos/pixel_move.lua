@@ -3,9 +3,11 @@
 --
 -- SPDX-License-Identifier: CC0-1.0
 
-x = 128
-y = 96
-color = 4
+function READY()
+    x = 128
+    y = 96
+    color = 4
+end
 
 function GO()
     cls(0)

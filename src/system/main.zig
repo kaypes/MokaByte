@@ -34,9 +34,11 @@ pub fn main() !void {
     var speaker = try audio.Driver.init();
     defer speaker.deinit();
 
+    vm.ready();
+
     while (!rl.windowShouldClose()) {
         input.update(&machine);
-        vm.tick();
+        vm.go();
         speaker.update(&machine);
         display.drawFrame(&machine);
     }
