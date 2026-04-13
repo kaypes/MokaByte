@@ -12,12 +12,16 @@ const draw = @import("draw.zig");
 
 const mem_index = ziglua.Lua.upvalueIndex(1);
 
+fn safeColor(c: i64) u8 {
+    return @as(u8, @intCast(@mod(c, 16)));
+}
+
 pub fn cls(lua: *ziglua.Lua) i32 {
     const mem_ptr = lua.toUserdata(machine.Memory, mem_index) catch return 0;
 
     const color = lua.toInteger(1) catch 0;
 
-    draw.cls(mem_ptr, @intCast(color));
+    draw.cls(mem_ptr, safeColor(color));
 
     return 0;
 }
@@ -30,7 +34,7 @@ pub fn pix(lua: *ziglua.Lua) i32 {
 
     const color = lua.toInteger(3) catch 0;
 
-    draw.pix(mem_ptr, @intCast(x), @intCast(y), @intCast(color));
+    draw.pix(mem_ptr, @intCast(x), @intCast(y), safeColor(color));
 
     return 0;
 }
@@ -92,10 +96,10 @@ pub fn sfx(lua: *ziglua.Lua) i32 {
         ch_idx = @as(usize, @intCast(@max(0, @min(channel, 5))));
     }
 
-    mem_ptr.map.sound_channels[ch_idx].freq = @intCast(freq);
-    mem_ptr.map.sound_channels[ch_idx].vol = @intCast(vol);
-    mem_ptr.map.sound_channels[ch_idx].wave = @intCast(wave);
-    mem_ptr.map.sound_channels[ch_idx].duration = @intCast(duration);
+    mem_ptr.map.sound_channels[ch_idx].freq = @intCast(@max(0, @min(freq, 65535)));
+    mem_ptr.map.sound_channels[ch_idx].vol = @intCast(@max(0, @min(vol, 255)));
+    mem_ptr.map.sound_channels[ch_idx].wave = @intCast(@mod(wave, 4));
+    mem_ptr.map.sound_channels[ch_idx].duration = @intCast(@max(0, @min(duration, 65535)));
 
     return 0;
 }
