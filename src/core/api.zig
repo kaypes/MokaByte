@@ -82,6 +82,11 @@ pub fn sfx(lua: *ziglua.Lua) i32 {
     const wave = lua.toInteger(3) catch 1;
     const duration = lua.toInteger(4) catch 0;
 
+    const max_freq = 65535;
+    const max_vol = 255;
+    const num_waves = 4;
+    const max_duration = 65535;
+
     const channel = lua.toInteger(5) catch -1;
     var ch_idx: usize = 0;
 
@@ -96,10 +101,10 @@ pub fn sfx(lua: *ziglua.Lua) i32 {
         ch_idx = @as(usize, @intCast(@max(0, @min(channel, 5))));
     }
 
-    mem_ptr.map.sound_channels[ch_idx].freq = @intCast(@max(0, @min(freq, 65535)));
-    mem_ptr.map.sound_channels[ch_idx].vol = @intCast(@max(0, @min(vol, 255)));
-    mem_ptr.map.sound_channels[ch_idx].wave = @intCast(@mod(wave, 4));
-    mem_ptr.map.sound_channels[ch_idx].duration = @intCast(@max(0, @min(duration, 65535)));
+    mem_ptr.map.sound_channels[ch_idx].freq = @intCast(@max(0, @min(freq, max_freq)));
+    mem_ptr.map.sound_channels[ch_idx].vol = @intCast(@max(0, @min(vol, max_vol)));
+    mem_ptr.map.sound_channels[ch_idx].wave = @intCast(@mod(wave, num_waves));
+    mem_ptr.map.sound_channels[ch_idx].duration = @intCast(@max(0, @min(duration, max_duration)));
 
     return 0;
 }
